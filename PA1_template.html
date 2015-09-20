@@ -134,8 +134,13 @@ plot(stepMean_Interval$interval, stepMean_Interval$steps, type = &quot;l&quot;, 
 <div id="calculate-which-5-minute-interval-on-average-across-all-the-days-in-the-dataset-contains-the-maximum-number-of-steps" class="section level2">
 <h2>2. Calculate which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps</h2>
 <pre class="r"><code>stepMean_Interval &lt;- summarise(na.omit(activity_intervalGroups), steps = mean(steps))
-max(na.omit(stepMean_Interval$steps))                                      ## Ignore incomplete cases, return max value for steps.  </code></pre>
-<pre><code>## [1] 206.1698</code></pre>
+stepMeanMax &lt;- arrange(stepMean_Interval, desc(steps))        ## Ignore incomplete cases, return max value for steps.  
+stepMeanMax[1,]</code></pre>
+<pre><code>## Source: local data frame [1 x 2]
+## 
+##   interval    steps
+##      (int)    (dbl)
+## 1      835 206.1698</code></pre>
 </div>
 </div>
 <div id="imputing-missing-values" class="section level1">

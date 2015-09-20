@@ -107,11 +107,16 @@ plot(stepMean_Interval$interval, stepMean_Interval$steps, type = "l", ylab = "Me
 
 ```r
 stepMean_Interval <- summarise(na.omit(activity_intervalGroups), steps = mean(steps))
-max(na.omit(stepMean_Interval$steps))                                      ## Ignore incomplete cases, return max value for steps.  
+stepMeanMax <- arrange(stepMean_Interval, desc(steps))        ## Ignore incomplete cases, return max value for steps.  
+stepMeanMax[1,]
 ```
 
 ```
-## [1] 206.1698
+## Source: local data frame [1 x 2]
+## 
+##   interval    steps
+##      (int)    (dbl)
+## 1      835 206.1698
 ```
 
 # Imputing missing values
@@ -261,3 +266,4 @@ plot(stepMean_Interval_weekend$interval, stepMean_Interval_weekend$steps, type =
 
 
 Oh wow we can actually see the morning commute, meal breaks, and return home during the work week, and people sleeping in on the weekends then going on to more sporadic activity. THIS IS FUN.
+

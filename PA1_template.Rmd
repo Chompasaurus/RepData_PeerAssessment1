@@ -127,6 +127,23 @@ activity$dayFactor <- as.factor(activity$dayFactor)
 
 ## 2. Make a panel plot containing time series plots of every interval averaged across weekdays and weekends
 ```{r dayFactor Panel Plot}
+weekday_Activity <- activity[activity$dayFactor == "weekday",]
+weekend_Activity <- activity[activity$dayFactor == "weekend",]
+
+weekday_Activity_intervalGroups <- group_by(weekday_Activity, interval)
+weekend_Activity_intervalGroups <- group_by(weekend_Activity, interval)
+
+stepMean_Interval_weekday <- summarise(weekday_Activity_intervalGroups, steps = mean(steps))
+stepMean_Interval_weekend <- summarise(weekend_Activity_intervalGroups, steps = mean(steps))
+
+par(mfrow = c(2,1))
+par(mar = c(0,4,2,0))
+plot(stepMean_Interval_weekday$interval, stepMean_Interval_weekday$steps, type = "l", ylab = "Weekday", xlab = "", main = "Activity throughout the day")
+plot(stepMean_Interval_weekend$interval, stepMean_Interval_weekend$steps, type = "l", ylab = "Weekend", xlab = "Day in 5-minute intervals")
 
 ```
-If you are reading this it means I didn't wake up in time to make the panel plot.  Good thing I submitted everything else.
+
+
+
+Oh wow we can actually see the morning commute, meal breaks, and return home during the work week, and people sleeping in on the weekends then going on to more sporadic activity. THIS IS FUN.
+
